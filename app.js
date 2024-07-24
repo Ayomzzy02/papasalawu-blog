@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // This is the index route to the Backend Server Endpoint
-app.get("/", (req, res, next) => {
+app.get("/test", (req, res, next) => {
   return res.status(200).json({
     status: "success",
     message: "Welcome to TechCorp API. 🎯",
