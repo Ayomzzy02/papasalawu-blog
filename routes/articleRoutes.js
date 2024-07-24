@@ -6,12 +6,12 @@ const {
     getAllArticles,
     createArticle,
     updateArticle,
-    deleteArticle
+    deleteArticle,
+    getArticle
 } = require("../controllers/articleControllers");
 
-
-//Route for fetching All Articles 
-router.route("/getAllArticles").get(getAllArticles);
+router.route("/getAllArticles").get(getAllArticles); //Route for fetching All Articles 
+router.route("/getArticles/:articleId").get(getAllArticles); //Route for fetching Specific Articles 
 
 //Authentication middleware: Routes below here are protected route and will require authentication
 router.use(authenticate);
@@ -22,12 +22,12 @@ router.post(
 );
 
 router.patch(
-  "/update",
+  "/update/:articleId",
   updateArticle
 );
 
 router.delete(
-  "/delete",
+  "/delete/:articleId",
   deleteArticle
 );
 

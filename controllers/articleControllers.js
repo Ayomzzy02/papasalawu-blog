@@ -50,16 +50,9 @@ exports.createArticle = catchAsync(async (req, res, next) => {
 
 exports.deleteArticle = catchAsync(async function (req, res, next) {
   try {
-    const  userId  = req.user.id;
+    const { articleId } = req.params;
 
-    if (deleteArticle) {
-      return res.status(200).json({
-        status: "success",
-        data: {
-          message: "Article successfully deleted.",
-        },
-      });
-    }
+    await Article.findByIdAndDelete(articleId);
 
     res.status(200).send("Article Deleted successfully");
   } catch (error) {
@@ -67,16 +60,19 @@ exports.deleteArticle = catchAsync(async function (req, res, next) {
   }
 });
 
+
 exports.updateArticle = catchAsync(async function (req, res, next) {
   try {
-    const  userId  = req.user.id;
+    const { articleId } = req.params;
 
+    //update Host User Listing
+    const updateArticle = await Article.findByIdAndUpdate(articleId, req.body);
 
     if (updateArticle) {
       return res.status(200).json({
         status: "success",
         data: {
-          message: "Article successfully updated.",
+          message: "Article Updated Successfully.",
         },
       });
     }
